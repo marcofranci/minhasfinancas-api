@@ -74,7 +74,7 @@ public class LancamentoServiceImpl implements LancamentoService {
 	public void validar(Lancamento lancamento) {
 		
 		if(lancamento.getDescricao() == null || lancamento.getDescricao().trim().contentEquals("")) {
-			throw new RegraNegocioException("Informe uma descrição válida.");
+			throw new RegraNegocioException("Informe uma Descrição válida.");
 		}
 		
 		if(lancamento.getMes() == null || lancamento.getMes() <1 || lancamento.getMes() > 12) {

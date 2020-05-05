@@ -39,11 +39,11 @@ public class UsuarioServiceTest {
 
 	// service = Mockito.spy(UsuarioServiceImpl.class);
 //	}
-
+	@Test
 	public void deveSalvarUmUsuario() {
 		// cenário
 		Mockito.doNothing().when(service).validarEmail(Mockito.anyString());
-		Usuario usuario = Usuario.builder().id(1l).nome("nome").email("emaill@email.com").senha("senha").build();
+		Usuario usuario = Usuario.builder().id(1l).nome("nome").email("email@email.com").senha("senha").build();
 
 		Mockito.when(repository.save(Mockito.any(Usuario.class))).thenReturn(usuario);
 
@@ -53,15 +53,16 @@ public class UsuarioServiceTest {
 		// verificacao
 		Assertions.assertThat(usuarioSalvo.getId()).isNotNull();
 		Assertions.assertThat(usuarioSalvo.getId()).isEqualTo(1l);
-		Assertions.assertThat(usuarioSalvo.getEmail()).isEqualTo("nome");
+		Assertions.assertThat(usuarioSalvo.getNome()).isEqualTo("nome");
 		Assertions.assertThat(usuarioSalvo.getEmail()).isEqualTo("email@email.com");
-		Assertions.assertThat(usuarioSalvo.getEmail()).isEqualTo("senha");
+		Assertions.assertThat(usuarioSalvo.getSenha()).isEqualTo("senha");
 
 		org.junit.jupiter.api.Assertions.assertDoesNotThrow(() -> {
 			service.salvarUsuario(new Usuario());
 		});
 	}
 
+	@Test
 	public void naoDeveSalvarUmUsuarioComEmailJaCadastrado() {
 		// cenario
 		String email = "email@email.com";
